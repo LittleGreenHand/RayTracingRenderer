@@ -43,10 +43,15 @@ int main()
 	{
 		for (int i = 0; i < image_width; ++i) 
 		{
-			double u = double(i) / (image_width - 1);
-			double v = double(j) / (image_height - 1);
-			ray r(origin, lower_left_corner + u * horizontal + v * vertical - origin);
-			color pixel_color = ray_color(r,world);
+			color pixel_color(0, 0, 0);
+			for (int m = 0; m < samples_per_pixel; m++)
+			{
+				double u = (i + random_double()) / (image_width - 1);
+				double v = (j + random_double()) / (image_height - 1);
+				ray r = cam.get_ray(u, v);
+				pixel_color += ray_color(r, world);
+			}
+			
 			write_color(outPPM, pixel_color,samples_per_pixel);
 		}
 		outPPM << endl;

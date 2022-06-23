@@ -26,8 +26,8 @@ inline double random_double() {
 inline double random_double(double min, double max) {
 	//[min,max)
 	//return min + (max - min) * random_double();
-	static uniform_real_distribution<double> distribution(0.0,1.0);
-	static mt19937 generator;
+	static std::uniform_real_distribution<double> distribution(0.0,1.0);
+	static std::mt19937 generator;
 	return distribution(generator);
 }
 inline double clamp(double x, double min, double max) {
