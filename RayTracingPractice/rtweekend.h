@@ -1,3 +1,4 @@
+#pragma once
 #ifndef RTWEEKEND_H
 #define RTWEEKEND_H
 
@@ -34,6 +35,17 @@ inline double clamp(double x, double min, double max) {
 	if (x < min) return min;
 	if (x > max) return max;
 	return x;
+}
+//普通函数
+vec3 random_in_unit_sphere()
+{
+	while (true)
+	{
+		vec3 p = vec3::random(-1, 1);
+		if (p.length_squared() >= 1)
+			continue;
+		return p;
+	}
 }
 //公共头文件
 #include"ray.h"

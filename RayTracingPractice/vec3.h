@@ -4,8 +4,21 @@
 #endif
 #include<cmath>
 #include<iostream>
+#include<random>
 using std::sqrt;
 
+inline double randomdouble() {
+	//[0,1)
+	return rand() / (RAND_MAX + 1.0);
+}
+
+inline double randomdouble(double min, double max) {
+	//[min,max)
+	//return min + (max - min) * random_double();
+	static std::uniform_real_distribution<double> distribution(0.0, 1.0);
+	static std::mt19937 generator;
+	return distribution(generator);
+}
 class vec3 {
 public:
 	//¹¹Ôìº¯Êý
@@ -40,6 +53,12 @@ public:
 	}
 	double length_squared() const {
 		return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
+	}
+	inline static vec3 random() {
+		return vec3(randomdouble(), randomdouble(), randomdouble());
+	}
+	inline static vec3 random(double min, double max) {
+		return vec3(randomdouble(min, max), randomdouble(min, max), randomdouble(min, max));
 	}
 public:
 	double e[3];
